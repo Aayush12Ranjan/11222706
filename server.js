@@ -17,4 +17,4 @@ mongoose.connect("mongodb://localhost:27017/urlshort")
 app.use('/', shortenerRoutes);
 
 
-app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running at port http://localhost:${PORT}`));

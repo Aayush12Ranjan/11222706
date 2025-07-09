@@ -1,7 +1,8 @@
 
 import express from 'express';
 import shortid from 'shortid';
-import ShortUrl from '../model/ShortUrl.js';
+import Url from '../model/ShortUrl.js';
+
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -16,15 +17,18 @@ router.post('/shorten', async (req, res) => {
 
   const existing = await Url.findOne({ fullUrl });
   if (existing) {
-    return res.json({ shortUrl: `${process.env.BASE}/${existing.shortCode}` });
+    return res.json({ shortUrl: `http://localhost:5000/${existing.shortCode}` }); 
   }
-
+  
   const shortCode = shortid.generate();
   const newEntry = new Url({ fullUrl, shortCode });
   await newEntry.save();
 
   res.json({ shortUrl: `${process.env.BASE}/${shortCode}` });
 });
+
+
+
 
 
 router.get('/:code', async (req, res) => {
